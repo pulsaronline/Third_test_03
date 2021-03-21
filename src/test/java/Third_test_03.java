@@ -12,20 +12,20 @@ public class Third_test_03 {
 
     @BeforeAll
     public static void setup() {
-        //use 800x600 browser dimension
-        Configuration.browserSize="800x400";
-        //Configuration.startMaximized = true;
+        // Окно браузера на весь экран
+        Configuration.startMaximized = true;
     }
 
     @Test
-    void dragAndDropSelenideTest() {
+    void selenideContributorsTest() {
         //- Откройте https://the-internet.herokuapp.com/drag_and_drop
         open("https://github.com/selenide/selenide");
-        sleep(5000);
+        // Создаем список контрибуторов blockContributors. В нем найдем самый первый элемент.
         SelenideElement blockContributors = $(".BorderGrid")
         .$(byText("Contributors"));
+        // вызовем попап окно первого элемента
         blockContributors.closest("div").$("ul li").hover();
-        sleep(5000);
-
+        // в попап окне проверим что это контрибутор-окно с текстом asolntsev
+        $$(".Popover-message").findBy(visible).shouldHave(text("asolntsev"));
     }
 }
